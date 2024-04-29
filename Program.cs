@@ -84,13 +84,15 @@ namespace csharp_lista_indirizzi
                         listaIndirizzi.Add(adres);
                     }
                 }
+
+                catch (NotIntValueException e)
+                {
+                    Console.WriteLine("\nIl codice ZIP deve essere un numero intero.\n");
+                }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
                 }
-                
-
-
 
             }
 
