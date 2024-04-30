@@ -60,7 +60,14 @@ namespace csharp_lista_indirizzi
                         string street = dati[2];
                         string city = dati[3];
                         string province = dati[4];
-                        int zip = int.Parse(dati[5]);
+                
+
+                        int zip;
+                        if (!int.TryParse(dati[5], out zip))
+                        {
+                            Console.WriteLine("\nIl codice ZIP deve essere un numero intero.\n");
+                            continue; // Salta il resto del loop e passa alla prossima iterazione
+                        }
 
                         if (string.IsNullOrEmpty(street))
                         {
