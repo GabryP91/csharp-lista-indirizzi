@@ -6,9 +6,6 @@ using System.Threading.Tasks;
 
 namespace csharp_lista_indirizzi
 {
-    public class NotIntValueException : Exception
-    {
-    }
 
     internal class Indirizzo
     {
@@ -31,12 +28,7 @@ namespace csharp_lista_indirizzi
             City = city;
             Street = street;
             Province = province;
-
-           
-            if(zip is string)
-            {
-                throw new NotIntValueException();
-            }else ZIP = zip;
+            ZIP = zip;
         }
         public string Name
         {

@@ -39,9 +39,8 @@ namespace csharp_lista_indirizzi
                 if (i <= 1) // Ignoro la prima riga del testo
                     continue;
 
-                // Converto ogni linea in un indirizzo
-                try
-                {
+
+                    // Converto ogni linea in un indirizzo
                     var dati = linea.Split(','); // Supponendo che il separatore sia dato dalla virgola
 
                     //se la lunghezza della singola riga del file è minore di 6
@@ -53,54 +52,53 @@ namespace csharp_lista_indirizzi
                     else
                     {
 
+                        try
+                        {
+                            //acquisisco ogni dato dalle dovute posizioni
+                            string name = dati[0];
+                            string surname = dati[1];
+                            string street = dati[2];
+                            string city = dati[3];
+                            string province = dati[4];
 
-                        //acquisisco ogni dato dalle dovute posizioni
-                        string name = dati[0];
-                        string surname = dati[1];
-                        string street = dati[2];
-                        string city = dati[3];
-                        string province = dati[4];
+
+                            int zip;
+                            if (!int.TryParse(dati[5], out zip))
+                            {
+                                throw new NotImplementedException();
+
+                            }
+
+                            if (string.IsNullOrEmpty(street))
+                            {
+                                street = "Valore assente";
+                            }
+
+                            if (string.IsNullOrEmpty(name))
+                            {
+                                name = "Valore assente";
+                            }
+
+                            if (string.IsNullOrEmpty(province))
+                            {
+                                province = "Valore assente";
+                            }
+
+                            //creo un oggetto indirizzo passando le informazioni acquisite precedentemente
+                            Indirizzo adres = new Indirizzo(name, surname, street, city, province, zip);
+
+                            //inserisco all'interno della mia lista di indirizzi il nuovo indirizzo
+                            listaIndirizzi.Add(adres);
+                        }
+
+                        
+                        catch (NotImplementedException e)
+                        {
+                        Console.WriteLine("\nIl codice ZIP deve essere un numero intero.\n");
+                        }
                 
-
-                        int zip;
-                        if (!int.TryParse(dati[5], out zip))
-                        {
-                            Console.WriteLine("\nIl codice ZIP deve essere un numero intero.\n");
-                            continue; // Salta il resto del loop e passa alla prossima iterazione
-                        }
-
-                        if (string.IsNullOrEmpty(street))
-                        {
-                            street = "Valore assente";
-                        }
-
-                        if (string.IsNullOrEmpty(name))
-                        {
-                            name = "Valore assente";
-                        }
-
-                        if (string.IsNullOrEmpty(province))
-                        {
-                            province = "Valore assente";
-                        }
-
-                        //creo un oggetto indirizzo passando le informazioni acquisite precedentemente
-                        Indirizzo adres = new Indirizzo(name, surname, street, city, province, zip);
-
-                        //inserisco all'interno della mia lista di indirizzi il nuovo indirizzo
-                        listaIndirizzi.Add(adres);
-                    }
                 }
-
-                catch (NotIntValueException e)
-                {
-                    Console.WriteLine("\nIl codice ZIP deve essere un numero intero.\n");
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-
+                
             }
 
             // Stampa degli indirizzi
